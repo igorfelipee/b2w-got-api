@@ -1,4 +1,18 @@
-import { saveNewCharacter } from './repository';
+import { saveNewCharacter, getCharacterById } from './repository';
+import ERROR from '../constants/error';
+
+export const getCharacter = async (req, res, next) => {
+  try {
+    const { characterId } = req.params;
+    const response = await getCharacterById(characterId);
+    if (!response) {
+      throw ERROR.CharacterNotFound;
+    }
+    res.status(200).send(response);
+  } catch (error) {
+    next(error);
+  }
+};
 
 export const createCharacter = (req, res) => {
   const character = req.body;

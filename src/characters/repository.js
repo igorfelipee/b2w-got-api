@@ -1,11 +1,8 @@
 import CharacterModel from './model';
 
-export const saveNewCharacter = async character => {
+export const saveNewCharacter = character => {
   const newCharacter = new CharacterModel(character);
-  try {
-    const response = await newCharacter.save();
-    return response;
-  } catch (error) {
-    throw error;
-  }
+  return newCharacter.save();
 };
+
+export const getCharacterById = characterId => CharacterModel.findById(characterId);
