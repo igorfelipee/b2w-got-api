@@ -1,11 +1,19 @@
 import { Router } from 'express';
-import { createCharacter, getCharacter } from './service';
+import {
+  createCharacter,
+  getCharacter,
+  deleteCharacter,
+  getCharacters,
+  putCharacter
+} from './service';
 
 const routes = new Router();
 
 routes
-  .get('/', (req, res) => res.send('Endpoint de personagens'))
+  .get('/', getCharacters)
   .post('/', createCharacter)
-  .get('/:characterId', getCharacter);
+  .get('/:characterId', getCharacter)
+  .delete('/:characterId', deleteCharacter)
+  .put('/:characterId', putCharacter);
 
 export default routes;
